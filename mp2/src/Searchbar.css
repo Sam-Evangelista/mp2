@@ -1,0 +1,27 @@
+.outer-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2vw;
+}
+
+.smaller-container {
+    display: flex;
+}
+
+.searchbar {
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.searchbutton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
