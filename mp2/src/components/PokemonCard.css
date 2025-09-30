@@ -1,0 +1,23 @@
+.card-bg {
+    background-color: yellow;
+    width: 30vw;
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-inner {
+    background-color: rgba(201, 201, 38, 0.546);
+    width: 25vw;
+    height: 35vw;
+}
+
+.sprite {
+    width: 15vw;
+    margin-left: 5vw;
+    /* margin: auto; */
+    border-style: solid;
+    border-color: yellow;
+    border-width: 10px;
+}
