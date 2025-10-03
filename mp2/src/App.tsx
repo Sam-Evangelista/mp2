@@ -5,32 +5,47 @@ import './App.css';
 import Searchbar from './components/Searchbar';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import { PokemonProps } from './PokemonCard';
-
-async function getPokemon () {
-  try {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon/ditto');
-    console.log(response);
-    let name:string = response.data.name;
-    let id:number = response.data.id;
-    console.log(name);
-    console.log(id);
-    console.log(response.data.sprites.front_default);
-  }
-  catch (error) {
-    console.error(error);
-  }
-}
-
-
+import { useState, useEffect } from 'react';
+import { PokemonProps } from './components/PokemonCard';
 
 function App() {
-  let name, id = getPokemon();
+  const [list, setList] = useState<PokemonProps[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const listRes = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=151");
+        
+        const details = await Promise.all(
+          listRes.data.results.map((p: { name: string; url: string }) =>
+            axios.get(p.url).then((r) => ({
+              id: r.data.id,
+              name: r.data.name,
+              img: r.data.sprites.front_default as string,
+            }))
+          )
+        );
+
+        setList(details);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+  
   return (
     <div>
       <Header/>
-      <Searchbar/>
-      <Pokemon name="Ditto" img="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" id={1}/>
+      {/* <body> */}
+        <Searchbar/>
+        <div className='pokemon-cards'>
+          {list.map((p) => (
+            <Pokemon key={p.id} id={p.id} name={p.name} img={p.img} />
+          ))}
+        </div>
+      {/* </body> */}
+      
+
       <Footer/>
     </div>
   );

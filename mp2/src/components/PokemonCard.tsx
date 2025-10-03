@@ -1,17 +1,30 @@
 import './PokemonCard.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-interface PokemonProps {
+type PokemonProps = {
     name: string;
     img: string;
     id: number;
 }
 
 function Pokemon({name, img, id} : PokemonProps) {
-    return (
-      <div className="card-bg">
+  name = name.charAt(0).toUpperCase() + name.slice(1);  
+  const [message, setMessage] = useState('');
+  let navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/${id}`, {state: {id, name, img}});
+  }
+  
+  return (
+      <div onClick={handleClick} className="card-bg">
         <div className='card-inner'>
-            <h2>{name}</h2>
-            <p>{id}</p>
+            <div className='title'>
+              <h2>{name}</h2>
+              <p>{id}</p>
+            </div>
+            
             <img className='sprite' src={img}/>
             <p>Pokemon Description</p>
         </div>

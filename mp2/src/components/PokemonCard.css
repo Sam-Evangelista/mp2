@@ -1,5 +1,6 @@
 .card-bg {
-    background-color: yellow;
+    background-color: #ecb223;
+    border-radius: 5px;
     width: 30vw;
     height: 40vw;
     display: flex;
@@ -7,17 +8,32 @@
     align-items: center;
 }
 
+.card-bg:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
 .card-inner {
-    background-color: rgba(201, 201, 38, 0.546);
+    background-color: #e5bb81;
+    border-radius: 5px;
     width: 25vw;
     height: 35vw;
 }
 
 .sprite {
-    width: 15vw;
-    margin-left: 5vw;
+    width: 24vw;
+    /* margin-left: 5vw; */
     /* margin: auto; */
     border-style: solid;
-    border-color: yellow;
+    border-color: black;
     border-width: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1vw;
 }
