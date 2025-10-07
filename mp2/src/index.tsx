@@ -5,16 +5,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import StatsPage from './components/StatsPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <BrowserRouter basename="/mp2">
+    <Header/>
     <Routes>
       <Route path='/' element={<App/>}/>
       <Route path='/:id' element={<StatsPage/>}/>
     </Routes>
+    <Footer/>
   </BrowserRouter>
 );
 

@@ -6,9 +6,10 @@ type PokemonProps = {
     name: string;
     img: string;
     id: number;
+    types: string[];
 }
 
-function Pokemon({name, img, id} : PokemonProps) {
+function Pokemon({name, img, id, types} : PokemonProps) {
   name = name.charAt(0).toUpperCase() + name.slice(1);  
   // const [message, setMessage] = useState('');
   let navigate = useNavigate();
@@ -26,6 +27,8 @@ function Pokemon({name, img, id} : PokemonProps) {
             </div>
             
             <img className='sprite' src={img} alt={name}/>
+            <p>{types[0]}</p>
+            <p>{types[1]}</p>
             {/* <p>Pokemon Description</p> */}
         </div>
       </div>

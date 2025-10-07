@@ -2,7 +2,7 @@ import '../PokemonDrop.css'
 import { PokemonProps } from './PokemonCard';
 import { useNavigate } from 'react-router';
 
-function PokemonDrop({name, img, id} : PokemonProps) {
+function PokemonDrop({name, img, id, types} : PokemonProps) {
     let navigate = useNavigate();
     return (
         <div onClick={() => navigate(`/${id}`)} className='outer-pk-container'>

@@ -30,7 +30,7 @@ function StatsPage () {
             <h1>{list.name.charAt(0).toUpperCase() + list.name.slice(1)}</h1>
             <img src={list.sprites.front_default} alt={list.name}/>
             <p>ID: {list.id}</p>
-            <p>Type: {list.types[0].type.name}</p>
+            <p>Type(s): {list.types[0]?.type.name} {list.types[1] ? ` / ${list.types[1].type.name}` : ''}</p>
             <p>Base Experience: {list.base_experience}</p>
             <p>Weight: {list.weight}</p>
             <p>Height: {list.height}</p>

@@ -1,10 +1,7 @@
-import React from 'react';
 import axios from 'axios';
 import Pokemon from './components/PokemonCard';
 import './App.css';
 import Searchbar from './components/Searchbar';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import Sort from './components/Sort';
 import { useState, useEffect } from 'react';
 import { PokemonProps } from './components/PokemonCard';
@@ -15,7 +12,26 @@ function App() {
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('');
   const [isToggled, setIsToggled] = useState(false);
-  // const q = query.trim().toLowerCase();
+  
+  const [selectedType, setSelectedType] = useState<string>('');
+
+  const typeButtons = [
+    { label: 'Normal', value: 'normal' },
+    { label: 'Fire', value: 'fire' },
+    { label: 'Water', value: 'water' },
+    { label: 'Electric', value: 'electric' },
+    { label: 'Grass', value: 'grass' },
+    { label: 'Ice', value: 'ice' },
+    { label: 'Fighting', value: 'fighting' },
+    { label: 'Poison', value: 'poison' },
+    { label: 'Ground', value: 'ground' },
+    { label: 'Flying', value: 'flying' },
+    { label: 'Psychic', value: 'psychic' },
+    { label: 'Bug', value: 'bug' },
+    { label: 'Rock', value: 'rock' },
+    { label: 'Ghost', value: 'ghost' },
+    { label: 'Dragon', value: 'dragon' },
+  ];
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
@@ -32,6 +48,7 @@ function App() {
               id: r.data.id,
               name: r.data.name,
               img: r.data.sprites.front_default as string,
+              types: r.data.types.map((t: { type: { name: string } }) => t.type.name) as string[],
             }))
           )
         );
@@ -45,7 +62,6 @@ function App() {
   
   return (
     <div>
-      <Header/>
       <button className='toggle-button' onClick={handleToggle}>
         {isToggled ? 'Switch to Gallery' : 'Switch to List'} View
       </button>
@@ -81,20 +97,40 @@ function App() {
               }
               return 0;
             }).slice(0,5).map((p) => (
-              <PokemonDrop key={p.id} name={p.name} img={p.img} id={p.id}/>
+              <PokemonDrop key={p.id} name={p.name} img={p.img} id={p.id} types={p.types}/>
             ))}
           </div>
         </div>
       ) : (
         <div>
           <div className='pokemon-cards'>
-          {list.map((p) => (
-                <Pokemon key={p.id} name={p.name} img={p.img} id={p.id} />
-                ))}
+            <div className='buttons'>
+              <button onClick={() => setSelectedType('')}>All</button>
+              {typeButtons.map(t => (
+              <button
+                key={t.value}
+                onClick={() => setSelectedType(t.value)}
+                className={selectedType === t.value ? 'active' : ''}
+              >
+              {t.label}
+              </button>
+              ))}
+            </div>
+
+            {list
+              .filter(p => !selectedType || p.types.includes(selectedType))
+              .map(p => (
+                <Pokemon
+                  key={p.id}
+                  name={p.name}
+                  img={p.img}
+                  id={p.id}
+                  types={p.types}
+                />
+            ))}
           </div>
         </div>
       )}
-      <Footer/>
     </div>
   );
 }
