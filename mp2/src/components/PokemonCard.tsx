@@ -27,8 +27,8 @@ function Pokemon({name, img, id, types} : PokemonProps) {
             </div>
             
             <img className='sprite' src={img} alt={name}/>
-            <p>{types[0]}</p>
-            <p>{types[1]}</p>
+            <p className='type'>{types[0]}</p>
+            <p className='type'>{types[1]}</p>
             {/* <p>Pokemon Description</p> */}
         </div>
       </div>

@@ -37,3 +37,8 @@
     align-items: center;
     padding: 0 1vw;
 }
+
+.type {
+    text-transform: capitalize;
+    margin-left: 1vw;
+}
