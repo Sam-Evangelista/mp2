@@ -14,7 +14,7 @@ function Pokemon({name, img, id} : PokemonProps) {
   let navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${id}`, {state: {id, name, img}});
+    navigate(`/${id}`);
   }
   
   return (
