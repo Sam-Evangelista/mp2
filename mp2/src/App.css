@@ -9,3 +9,17 @@
 body {
     background-color: #fff6ec;
 }
+
+.toggle-button {
+    display: block;
+    margin: auto;
+    margin-top: 2vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

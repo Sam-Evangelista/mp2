@@ -1,0 +1,19 @@
+.outer-pk-container {
+    width: 50vw;
+}
+
+.pokemon-container:hover {
+    border: 2px solid #f80707;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    cursor: pointer;
+}
+
+.pokemon-container {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-evenly;
+    gap: 20px;
+    align-items: center;
+    background-color: white;
+}

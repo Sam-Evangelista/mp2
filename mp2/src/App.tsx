@@ -8,12 +8,14 @@ import Footer from './components/Footer';
 import Sort from './components/Sort';
 import { useState, useEffect } from 'react';
 import { PokemonProps } from './components/PokemonCard';
+import PokemonDrop from './components/PokemonDrop';
 
 function App() {
   const [list, setList] = useState<PokemonProps[]>([]);
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState('');
   const [isToggled, setIsToggled] = useState(false);
+  // const q = query.trim().toLowerCase();
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
@@ -44,21 +46,25 @@ function App() {
   return (
     <div>
       <Header/>
-      <button onClick={handleToggle}>
+      <button className='toggle-button' onClick={handleToggle}>
         {isToggled ? 'Switch to Gallery' : 'Switch to List'} View
       </button>
+
 
       
       
       
       {isToggled ? (
         <div>
-          <Searchbar query={query} setQuery={setQuery}/>
-          <Sort sort={sort} setSort={setSort}/>
-        
+          <div className='container'>
+            <Searchbar query={query} setQuery={setQuery}/>
+            <Sort sort={sort} setSort={setSort}/>
+          </div>
+          
           <div className='pokemon-cards'>
             
             {list.filter((item) => {
+              if (query.trim() === '') return false;
               return query.toLowerCase() === '' ? item : item.name.toLowerCase().includes(query);
             }).sort((a, b) => {
               if (sort === "name-asc") {
@@ -74,8 +80,8 @@ function App() {
                 return b.id - a.id;
               }
               return 0;
-            }).map((p) => (
-              <Pokemon key={p.id} name={p.name} img={p.img} id={p.id} />
+            }).slice(0,5).map((p) => (
+              <PokemonDrop key={p.id} name={p.name} img={p.img} id={p.id}/>
             ))}
           </div>
         </div>
@@ -88,9 +94,6 @@ function App() {
           </div>
         </div>
       )}
-
-
-      
       <Footer/>
     </div>
   );
