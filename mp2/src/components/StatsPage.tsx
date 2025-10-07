@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import '../StatsPage.css';
 
 function StatsPage () {
     let navigate = useNavigate();
@@ -22,30 +23,37 @@ function StatsPage () {
     if (!id) return <p>No Pokémon selected.</p>;
     if (!list) return <p>Loading...</p>;
   
-
+    console.log(list);
     return (
-        <div>
+        <div className='center-page'>
+          <div>
             <h1>{list.name.charAt(0).toUpperCase() + list.name.slice(1)}</h1>
             <img src={list.sprites.front_default} alt={list.name}/>
             <p>ID: {list.id}</p>
+            <p>Type: {list.types[0].type.name}</p>
+            <p>Base Experience: {list.base_experience}</p>
+            <p>Weight: {list.weight}</p>
+            <p>Height: {list.height}</p>
 
-            <button onClick={() => 
-                {
-                    const current = Number(id);
-                    const prev = current === 1 ? 151 : current - 1;
-                    navigate(`/${prev}`);
-            
-                }
-                
-            }>Previous</button>
-            <button onClick={() => 
-                {
-                    const current = Number(id);
-                    const next = current === 151 ? 1 : current + 1;
-                    navigate(`/${next}`);
-                }
-                
-            }>Next</button>
+            <div className='buttons'>
+              <button onClick={() => 
+                  {
+                      const current = Number(id);
+                      const prev = current === 1 ? 151 : current - 1;
+                      navigate(`/${prev}`);
+                  }
+                  
+              }>Previous</button>
+              <button onClick={() => 
+                  {
+                      const current = Number(id);
+                      const next = current === 151 ? 1 : current + 1;
+                      navigate(`/${next}`);
+                  }
+                  
+              }>Next</button>
+            </div>
+          </div>
         </div>
         );
 }
