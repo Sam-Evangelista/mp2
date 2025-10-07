@@ -21,15 +21,31 @@ function StatsPage () {
 
     if (!id) return <p>No Pokémon selected.</p>;
     if (!list) return <p>Loading...</p>;
+  
 
     return (
         <div>
-            <h1>{list.name}</h1>
+            <h1>{list.name.charAt(0).toUpperCase() + list.name.slice(1)}</h1>
             <img src={list.sprites.front_default} alt={list.name}/>
             <p>ID: {list.id}</p>
 
-            <button onClick={() => navigate(`/${Number(id) - 1}`)}>Previous</button>
-            <button onClick={() => navigate(`/${Number(id) + 1}`)}>Next</button>
+            <button onClick={() => 
+                {
+                    const current = Number(id);
+                    const prev = current === 1 ? 151 : current - 1;
+                    navigate(`/${prev}`);
+            
+                }
+                
+            }>Previous</button>
+            <button onClick={() => 
+                {
+                    const current = Number(id);
+                    const next = current === 151 ? 1 : current + 1;
+                    navigate(`/${next}`);
+                }
+                
+            }>Next</button>
         </div>
         );
 }

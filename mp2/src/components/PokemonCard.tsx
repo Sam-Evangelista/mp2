@@ -1,5 +1,5 @@
 import './PokemonCard.css';
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 type PokemonProps = {
@@ -10,7 +10,7 @@ type PokemonProps = {
 
 function Pokemon({name, img, id} : PokemonProps) {
   name = name.charAt(0).toUpperCase() + name.slice(1);  
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   let navigate = useNavigate();
 
   const handleClick = () => {
@@ -25,7 +25,7 @@ function Pokemon({name, img, id} : PokemonProps) {
               <p>{id}</p>
             </div>
             
-            <img className='sprite' src={img}/>
+            <img className='sprite' src={img} alt={name}/>
             <p>Pokemon Description</p>
         </div>
       </div>
